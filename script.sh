@@ -6,7 +6,7 @@
 echo "Menjalankan skrip Python..."
 
 # Menjalankan skrip Python
-python simple_script.py
+python https://github.com/rinnoum/bash-new/raw/main/simple_script.py
 
 # Selesai
 echo "Skrip telah selesai dijalankan."
