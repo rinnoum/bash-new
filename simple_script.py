@@ -29,6 +29,6 @@ model.compile(optimizer=Adam(lr=0.001), loss='binary_crossentropy', metrics=['ac
 checkpoint = ModelCheckpoint('best_model.h5', monitor='val_accuracy', save_best_only=True, mode='max')
 
 # Train the model
-history = model.fit(x_train, y_train, epochs=50, batch_size=32, validation_data=(x_test, y_test), callbacks=[checkpoint])
+history = model.fit(x_train, y_train, epochs=5000, batch_size=32, validation_data=(x_test, y_test), callbacks=[checkpoint])
 
 print("Pelatihan model selesai dan model terbaik disimpan sebagai 'best_model.h5'.")
