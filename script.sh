@@ -15,8 +15,14 @@ wget -O $python_script_file $python_script_url
 # Memeriksa apakah pengunduhan berhasil
 if [ $? -eq 0 ]; then
     echo "File Python berhasil diunduh."
-    # Menjalankan skrip Python
-    python $python_script_file
+    # Menjalankan skrip Python dengan batasan waktu 1 menit
+    timeout 1m python $python_script_file
+    # Memeriksa apakah skrip Python telah selesai dengan baik atau tidak
+    if [ $? -eq 0 ]; then
+        echo "Skrip Python telah selesai dijalankan."
+    else
+        echo "Skrip Python belum selesai dalam batas waktu yang ditentukan (1 menit)."
+    fi
     # Menghapus file Python setelah dijalankan
     rm $python_script_file
 else
